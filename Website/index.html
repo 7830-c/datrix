@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datrix — Agentic Data Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --crimson:#C0143C;
+  --crimson-dark:#8B0E2B;
+  --crimson-light:#E8174A;
+  --pink:#F472B6;
+  --pink-light:#FBBDD8;
+  --pink-pale:#FDF0F5;
+  --pink-subtle:#FEF6F9;
+  --white:#ffffff;
+  --off-white:#FAFAFA;
+  --charcoal:#1A1A1A;
+  --gray-dark:#2D2D2D;
+  --gray:#6B6B6B;
+  --gray-light:#C4C4C4;
+  --gray-border:#D0D0D0;
+  --shadow-sm:0 2px 12px rgba(192,20,60,0.08);
+  --shadow-md:0 8px 40px rgba(192,20,60,0.12);
+  --shadow-lg:0 20px 60px rgba(192,20,60,0.15);
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--white);
+  color:var(--charcoal);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* subtle dot pattern */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(circle,rgba(192,20,60,0.06) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1.1rem 5rem;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--gray-border);
+}
+
+.nav-logo{
+  display:flex;align-items:center;gap:11px;
+  text-decoration:none;
+}
+
+.nav-logo-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  font-weight:800;
+  color:var(--charcoal);
+  letter-spacing:-0.02em;
+}
+
+.nav-links{
+  display:flex;align-items:center;gap:2.5rem;list-style:none;
+}
+
+.nav-links a{
+  color:var(--gray);
+  text-decoration:none;
+  font-size:0.9rem;
+  font-weight:400;
+  transition:color 0.2s;
+  letter-spacing:0.01em;
+}
+
+.nav-links a:hover{color:var(--charcoal);}
+
+.nav-cta{
+  background:var(--crimson) !important;
+  color:var(--white) !important;
+  padding:0.55rem 1.4rem;
+  border-radius:6px;
+  font-weight:500 !important;
+  transition:background 0.2s !important;
+  font-size:0.88rem !important;
+}
+
+.nav-cta:hover{background:var(--crimson-dark) !important;color:var(--white) !important;}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:9rem 2rem 5rem;
+  background:linear-gradient(160deg,var(--white) 0%,var(--pink-subtle) 60%,var(--pink-pale) 100%);
+}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);
+  border:1px solid var(--pink-light);
+  border-radius:100px;
+  padding:0.38rem 1.1rem;
+  font-size:0.78rem;
+  color:var(--crimson);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:2rem;
+  box-shadow:var(--shadow-sm);
+  animation:fadeUp 0.7s ease both;
+}
+
+.eyebrow-dot{
+  width:6px;height:6px;
+  background:var(--crimson);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.4;transform:scale(0.75);}
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,7vw,5.8rem);
+  font-weight:800;
+  line-height:1.06;
+  letter-spacing:-0.03em;
+  max-width:860px;
+  margin-bottom:1.5rem;
+  color:var(--charcoal);
+  animation:fadeUp 0.7s 0.1s ease both;
+}
+
+.hero h1 em{
+  font-style:normal;
+  color:var(--crimson);
+  position:relative;
+}
+
+.hero h1 em::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--crimson),var(--pink));
+  border-radius:2px;
+}
+
+.hero p{
+  font-size:1.15rem;
+  color:var(--gray);
+  max-width:520px;
+  font-weight:300;
+  line-height:1.75;
+  margin-bottom:3rem;
+  animation:fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-btns{
+  display:flex;gap:1rem;align-items:center;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.7s 0.3s ease both;
+}
+
+.btn-primary{
+  background:var(--crimson);
+  color:var(--white);
+  padding:0.9rem 2.2rem;
+  border-radius:8px;
+  font-weight:600;
+  font-size:0.95rem;
+  text-decoration:none;
+  border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Outfit',sans-serif;
+  transition:all 0.2s;
+  box-shadow:0 4px 20px rgba(192,20,60,0.3);
+}
+
+.btn-primary:hover{
+  background:var(--crimson-dark);
+  transform:translateY(-1px);
+  box-shadow:0 8px 28px rgba(192,20,60,0.35);
+}
+
+.btn-ghost{
+  background:transparent;
+  color:var(--charcoal);
+  padding:0.9rem 2.2rem;
+  border-radius:8px;
+  font-weight:400;
+  font-size:0.95rem;
+  text-decoration:none;
+  border:1.5px solid var(--gray-border);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;
+}
+
+.btn-ghost:hover{border-color:var(--gray-light);color:var(--charcoal);}
+
+/* ── STATS ── */
+.stats-strip{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  gap:0;
+  background:var(--white);
+  border-top:1px solid var(--gray-border);
+  border-bottom:1px solid var(--gray-border);
+  flex-wrap:wrap;
+}
+
+.stat-item{
+  display:flex;flex-direction:column;align-items:center;
+  padding:2rem 3.5rem;
+  border-right:1px solid var(--gray-border);
+}
+
+.stat-item:last-child{border-right:none;}
+
+.stat-number{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  font-weight:800;
+  color:var(--crimson);
+  line-height:1;
+  margin-bottom:0.3rem;
+}
+
+.stat-label{
+  font-size:0.78rem;
+  color:var(--gray);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-weight:400;
+}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1;}
+
+.section-eyebrow{
+  display:inline-block;
+  font-size:0.72rem;
+  font-weight:600;
+  color:var(--crimson);
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  margin-bottom:0.9rem;
+}
+
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,4vw,3rem);
+  font-weight:800;
+  line-height:1.12;
+  letter-spacing:-0.025em;
+  color:var(--charcoal);
+  margin-bottom:1rem;
+}
+
+.section-sub{
+  font-size:1.05rem;
+  color:var(--gray);
+  font-weight:300;
+  line-height:1.75;
+}
+
+/* ── FLOW DIAGRAM ── */
+.flow-section{
+  padding:8rem 4rem;
+  background:var(--off-white);
+  border-top:1px solid var(--gray-border);
+  border-bottom:1px solid var(--gray-border);
+}
+
+.flow-inner{max-width:1100px;margin:0 auto;}
+
+.flow-header{text-align:center;margin-bottom:5rem;}
+
+.flow-diagram{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  flex-wrap:nowrap;
+  position:relative;
+}
+
+.flow-node{
+  display:flex;flex-direction:column;align-items:center;
+  gap:1rem;
+  flex:1;
+  min-width:130px;
+  max-width:160px;
+}
+
+.flow-icon-wrap{
+  width:72px;height:72px;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  transition:transform 0.3s;
+}
+
+.flow-node:hover .flow-icon-wrap{transform:translateY(-4px);}
+
+.flow-icon-wrap.crimson{
+  background:linear-gradient(135deg,var(--crimson),var(--crimson-light));
+  box-shadow:0 8px 24px rgba(192,20,60,0.3);
+}
+
+.flow-icon-wrap.pink{
+  background:linear-gradient(135deg,var(--pink),var(--pink-light));
+  box-shadow:0 8px 24px rgba(244,114,182,0.3);
+}
+
+.flow-icon-wrap.mixed{
+  background:linear-gradient(135deg,var(--crimson),var(--pink));
+  box-shadow:0 8px 24px rgba(192,20,60,0.25);
+}
+
+.flow-icon-wrap svg{
+  width:32px;height:32px;
+  stroke:var(--white);
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.flow-node-label{
+  font-family:'Playfair Display',serif;
+  font-size:0.92rem;
+  font-weight:700;
+  color:var(--charcoal);
+  text-align:center;
+  line-height:1.3;
+}
+
+.flow-node-sub{
+  font-size:0.75rem;
+  color:var(--gray);
+  text-align:center;
+  font-weight:300;
+  line-height:1.5;
+  max-width:130px;
+}
+
+.flow-arrow{
+  display:flex;flex-direction:column;align-items:center;
+  gap:4px;
+  flex-shrink:0;
+  padding:0 4px;
+  margin-top:-48px;
+}
+
+.arrow-line{
+  width:40px;height:2px;
+  background:linear-gradient(90deg,var(--pink-light),var(--crimson));
+  position:relative;
+  border-radius:2px;
+}
+
+.arrow-line::after{
+  content:'';
+  position:absolute;
+  right:-6px;top:-4px;
+  width:0;height:0;
+  border-left:8px solid var(--crimson);
+  border-top:5px solid transparent;
+  border-bottom:5px solid transparent;
+}
+
+.arrow-label{
+  font-size:0.65rem;
+  color:var(--pink);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-weight:500;
+  white-space:nowrap;
+}
+
+/* animated pulse on flow nodes */
+@keyframes nodeGlow{
+  0%,100%{box-shadow:0 8px 24px rgba(192,20,60,0.3);}
+  50%{box-shadow:0 8px 36px rgba(192,20,60,0.55);}
+}
+
+.flow-icon-wrap.crimson{animation:nodeGlow 3s ease-in-out infinite;}
+.flow-icon-wrap.crimson:nth-child(1){animation-delay:0s;}
+
+/* flow bottom output card */
+.flow-output{
+  margin-top:4rem;
+  background:var(--white);
+  border:1.5px solid var(--gray-border);
+  border-radius:20px;
+  padding:2.5rem 3rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:2rem;
+  box-shadow:var(--shadow-sm);
+  flex-wrap:wrap;
+}
+
+.output-left h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;
+  font-weight:800;
+  color:var(--charcoal);
+  margin-bottom:0.4rem;
+}
+
+.output-left p{
+  font-size:0.9rem;
+  color:var(--gray);
+  font-weight:300;
+  max-width:400px;
+}
+
+.output-badges{
+  display:flex;gap:0.6rem;flex-wrap:wrap;
+}
+
+.output-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:0.4rem 1rem;
+  border-radius:100px;
+  font-size:0.78rem;
+  font-weight:500;
+  border:1px solid;
+}
+
+.badge-verified{
+  background:rgba(192,20,60,0.07);
+  color:var(--crimson);
+  border-color:rgba(192,20,60,0.2);
+}
+
+.badge-scored{
+  background:rgba(244,114,182,0.1);
+  color:#be185d;
+  border-color:rgba(244,114,182,0.3);
+}
+
+.badge-honest{
+  background:#f0fdf4;
+  color:#15803d;
+  border-color:#bbf7d0;
+}
+
+/* ── HOW IT WORKS ── */
+.how-section{
+  padding:8rem 4rem;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.how-header{text-align:center;margin-bottom:5rem;}
+
+.how-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;
+}
+
+.how-card{
+  background:var(--white);
+  border:1px solid var(--gray-border);
+  border-radius:20px;
+  padding:2.2rem;
+  transition:all 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.how-card::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--crimson),var(--pink));
+  transform:scaleX(0);
+  transition:transform 0.3s;
+  transform-origin:left;
+}
+
+.how-card:hover{
+  border-color:var(--pink-light);
+  box-shadow:var(--shadow-md);
+  transform:translateY(-3px);
+}
+
+.how-card:hover::after{transform:scaleX(1);}
+
+.how-step{
+  font-size:0.7rem;
+  font-weight:600;
+  color:var(--crimson);
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  margin-bottom:1.2rem;
+}
+
+.how-icon{
+  width:50px;height:50px;
+  background:var(--pink-pale);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;
+}
+
+.how-icon svg{
+  width:24px;height:24px;
+  stroke:var(--crimson);
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.how-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--charcoal);
+  margin-bottom:0.6rem;
+  line-height:1.3;
+}
+
+.how-card p{
+  font-size:0.88rem;
+  color:var(--gray);
+  line-height:1.7;
+  font-weight:300;
+}
+
+/* ── FEATURES ── */
+.features-section{
+  padding:8rem 4rem;
+  background:var(--charcoal);
+}
+
+.features-inner{max-width:1200px;margin:0 auto;}
+
+.features-header{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:end;
+  margin-bottom:4rem;
+}
+
+.features-header .section-title{color:var(--white);}
+.features-header .section-eyebrow{color:var(--pink);}
+.features-header .section-sub{color:rgba(255,255,255,0.5);}
+
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;
+}
+
+.feat-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:2.2rem;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.3s;
+}
+
+.feat-card:hover{
+  background:rgba(255,255,255,0.07);
+  border-color:rgba(244,114,182,0.3);
+}
+
+.coming-soon{
+  position:absolute;top:1.2rem;right:1.2rem;
+  background:rgba(244,114,182,0.15);
+  color:var(--pink);
+  border:1px solid rgba(244,114,182,0.3);
+  border-radius:100px;
+  padding:0.2rem 0.75rem;
+  font-size:0.68rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.07em;
+}
+
+.feat-icon{
+  width:50px;height:50px;
+  background:rgba(192,20,60,0.15);
+  border:1px solid rgba(192,20,60,0.3);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.3rem;
+}
+
+.feat-icon svg{
+  width:24px;height:24px;
+  stroke:var(--pink);
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.feat-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--white);
+  margin-bottom:0.5rem;
+}
+
+.feat-card p{
+  font-size:0.86rem;
+  color:rgba(255,255,255,0.45);
+  line-height:1.7;
+  font-weight:300;
+}
+
+/* ── WAITLIST ── */
+.waitlist-section{
+  padding:8rem 4rem;
+  background:linear-gradient(135deg,var(--pink-pale) 0%,var(--white) 50%,var(--pink-subtle) 100%);
+  border-top:1px solid var(--gray-border);
+  text-align:center;
+}
+
+.waitlist-inner{max-width:580px;margin:0 auto;}
+
+.waitlist-inner .section-sub{
+  max-width:440px;
+  margin:0 auto 2.5rem;
+}
+
+.wl-form{
+  display:flex;gap:0.75rem;max-width:460px;margin:0 auto 1rem;
+}
+
+.wl-input{
+  flex:1;
+  background:var(--white);
+  border:1.5px solid var(--gray-border);
+  border-radius:8px;
+  padding:0.85rem 1.2rem;
+  color:var(--charcoal);
+  font-family:'Outfit',sans-serif;
+  font-size:0.95rem;
+  outline:none;
+  transition:border-color 0.2s;
+  box-shadow:var(--shadow-sm);
+}
+
+.wl-input::placeholder{color:var(--gray-light);}
+.wl-input:focus{border-color:var(--pink);}
+
+.wl-note{font-size:0.78rem;color:var(--gray-light);}
+
+.wl-success{
+  display:none;align-items:center;justify-content:center;gap:8px;
+  color:#15803d;font-size:0.95rem;margin-top:1rem;
+}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  padding:2.5rem 5rem;
+  background:var(--white);
+  border-top:1px solid var(--gray-border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+
+.footer-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+
+.footer-logo-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;
+  font-weight:800;
+  color:var(--charcoal);
+}
+
+.footer-copy{font-size:0.82rem;color:var(--gray-light);}
+
+.footer-links{display:flex;gap:1.8rem;list-style:none;}
+
+.footer-links a{
+  font-size:0.82rem;
+  color:var(--gray);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+
+.footer-links a:hover{color:var(--crimson);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.65s ease,transform 0.65s ease;
+}
+
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1.1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero{padding:7rem 1.5rem 4rem;}
+  .flow-section,.how-section{padding:5rem 1.5rem;}
+  .features-section{padding:5rem 1.5rem;}
+  .features-header{grid-template-columns:1fr;gap:1rem;}
+  .waitlist-section{padding:5rem 1.5rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+  .stat-item{padding:1.5rem 2rem;border-right:none;border-bottom:1px solid var(--gray-border);}
+  .stat-item:last-child{border-bottom:none;}
+  .flow-diagram{flex-wrap:wrap;gap:1rem;}
+  .flow-arrow{display:none;}
+  .flow-output{flex-direction:column;}
+  .wl-form{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+      <circle cx="9" cy="9" r="3.5" fill="#C0143C"/>
+      <circle cx="18" cy="9" r="2.5" fill="#F472B6"/>
+      <circle cx="27" cy="9" r="3.5" fill="#C0143C"/>
+      <circle cx="9" cy="18" r="2.5" fill="#F472B6"/>
+      <circle cx="18" cy="18" r="3.5" fill="#C0143C"/>
+      <circle cx="27" cy="18" r="2.5" fill="#F472B6"/>
+      <circle cx="9" cy="27" r="3.5" fill="#C0143C"/>
+      <circle cx="18" cy="27" r="2.5" fill="#F472B6"/>
+      <circle cx="27" cy="27" r="3.5" fill="#C0143C"/>
+      <line x1="9" y1="9" x2="27" y2="9" stroke="#F472B6" stroke-width="1.2"/>
+      <line x1="9" y1="18" x2="27" y2="18" stroke="#F472B6" stroke-width="1.2"/>
+      <line x1="9" y1="27" x2="27" y2="27" stroke="#F472B6" stroke-width="1.2"/>
+      <line x1="9" y1="9" x2="9" y2="27" stroke="#F472B6" stroke-width="1.2"/>
+      <line x1="18" y1="9" x2="18" y2="27" stroke="#F472B6" stroke-width="1.2"/>
+      <line x1="27" y1="9" x2="27" y2="27" stroke="#F472B6" stroke-width="1.2"/>
+      <line x1="9" y1="9" x2="27" y2="27" stroke="#C0143C" stroke-width="0.8" opacity="0.4"/>
+      <line x1="27" y1="9" x2="9" y2="27" stroke="#C0143C" stroke-width="0.8" opacity="0.4"/>
+    </svg>
+    <span class="nav-logo-text">Datrix</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#flow">How it works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#agents">Agents</a></li>
+    <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span class="eyebrow-dot"></span>
+    Agentic Data Intelligence
+  </div>
+  <h1>From query to clean data,<br><em>fully automated</em></h1>
+  <p>Multi-agent pipelines that collect, cross-verify, and score every data point. No hallucinations. No manual cleanup. Just data you can trust.</p>
+  <div class="hero-btns">
+    <a href="#waitlist" class="btn-primary">
+      Join the Waitlist
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+    <a href="#flow" class="btn-ghost">See the pipeline →</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <span class="stat-number">0</span>
+    <span class="stat-label">Hallucinated entries</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">10+</span>
+    <span class="stat-label">Data sources</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">5</span>
+    <span class="stat-label">Specialized agents</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">100%</span>
+    <span class="stat-label">Transparent output</span>
+  </div>
+</div>
+
+<!-- FLOW DIAGRAM -->
+<section class="flow-section" id="flow">
+  <div class="flow-inner">
+    <div class="flow-header reveal">
+      <span class="section-eyebrow">The Pipeline</span>
+      <h2 class="section-title">Query in. Verified data out.</h2>
+      <p class="section-sub" style="max-width:500px;margin:0 auto;">Five specialized agents work in sequence — each with one job, zero tolerance for fabrication.</p>
+    </div>
+
+    <div class="flow-diagram reveal">
+
+      <div class="flow-node">
+        <div class="flow-icon-wrap crimson">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="flow-node-label">Query<br>Agent</div>
+        <div class="flow-node-sub">Parses your natural language request into precise tasks</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+        <span class="arrow-label">dispatch</span>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-icon-wrap pink">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="flow-node-label">Collector<br>Agents</div>
+        <div class="flow-node-sub">Parallel scraping across 10+ web sources simultaneously</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+        <span class="arrow-label">merge</span>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-icon-wrap crimson">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div class="flow-node-label">Verifier<br>Agent</div>
+        <div class="flow-node-sub">Cross-checks every field, flags conflicts, assigns confidence scores</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+        <span class="arrow-label">review</span>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-icon-wrap pink">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="flow-node-label">Human<br>Review</div>
+        <div class="flow-node-sub">Low-confidence entries surfaced for human approval only</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+        <span class="arrow-label">export</span>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-icon-wrap mixed">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="flow-node-label">Output<br>Agent</div>
+        <div class="flow-node-sub">Delivers clean CSV, Excel, or JSON with per-field confidence</div>
+      </div>
+
+    </div>
+
+    <div class="flow-output reveal">
+      <div class="output-left">
+        <h3>Every output is honest by design</h3>
+        <p>Missing data is marked missing — never filled with plausible-looking fiction. What we can't verify, we flag. Always.</p>
+      </div>
+      <div class="output-badges">
+        <span class="output-badge badge-verified">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6l3 3 5-5"/></svg>
+          Verified entries
+        </span>
+        <span class="output-badge badge-scored">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="5"/><path d="M6 4v2l1.5 1.5"/></svg>
+          Confidence scored
+        </span>
+        <span class="output-badge badge-honest">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+          Zero hallucinations
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="agents">
+  <div class="how-header reveal">
+    <span class="section-eyebrow">Agent Roles</span>
+    <h2 class="section-title">Each agent masters one thing</h2>
+    <p class="section-sub" style="max-width:480px;margin:0 auto;">Specialization beats generalization. Every agent in Datrix has a single, well-defined responsibility.</p>
+  </div>
+  <div class="how-grid">
+    <div class="how-card reveal">
+      <div class="how-step">Agent 01</div>
+      <div class="how-icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <h3>Query Agent</h3>
+      <p>Translates your plain-English request into a structured collection specification. Determines scope, fields, sources, and volume before a single byte is scraped.</p>
+    </div>
+    <div class="how-card reveal" style="transition-delay:0.08s">
+      <div class="how-step">Agent 02</div>
+      <div class="how-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Collector Agents</h3>
+      <p>Multiple parallel agents — each assigned a specific source. Websites, directories, maps, public databases. They run simultaneously, never wait for each other.</p>
+    </div>
+    <div class="how-card reveal" style="transition-delay:0.16s">
+      <div class="how-step">Agent 03</div>
+      <div class="how-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <h3>Verifier Agent</h3>
+      <p>Receives all collected data and cross-checks every field across sources. Detects duplicates, resolves conflicts, and assigns a per-field confidence score.</p>
+    </div>
+    <div class="how-card reveal" style="transition-delay:0.24s">
+      <div class="how-step">Agent 04</div>
+      <div class="how-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      </div>
+      <h3>Human-in-the-Loop</h3>
+      <p>Low-confidence entries never silently slip through. They surface in a clean review interface — you confirm, correct, or skip. The system learns from every decision.</p>
+    </div>
+    <div class="how-card reveal" style="transition-delay:0.32s">
+      <div class="how-step">Agent 05</div>
+      <div class="how-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </div>
+      <h3>Output Agent</h3>
+      <p>Formats your verified dataset into exactly the structure you need — CSV, Excel, or JSON — with a confidence column on every single row. No surprises in production.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="features-inner">
+    <div class="features-header reveal">
+      <div>
+        <span class="section-eyebrow">Features</span>
+        <h2 class="section-title">Built around one rule:<br>never lie</h2>
+      </div>
+      <p class="section-sub">Every feature exists to deliver data you can use directly — without a second of manual verification.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Zero hallucination policy</h3>
+        <p>Missing data is flagged as missing — never fabricated. The system is honest about gaps rather than hiding them with plausible-looking fiction.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.08s">
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Per-field confidence scoring</h3>
+        <p>Every field in every row gets a confidence score. High, partial, or flagged — you decide what threshold is acceptable for your use case.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.16s">
+        <span class="coming-soon">Coming Soon</span>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Natural language queries</h3>
+        <p>Describe what you need in plain English — no configuration, no column mapping, no technical setup. Datrix figures out the rest.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.24s">
+        <span class="coming-soon">Coming Soon</span>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Live agent monitoring</h3>
+        <p>Watch your agents work in real time. See what each agent found, where it struggled, and how confidence evolved per entry as data flows in.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.32s">
+        <span class="coming-soon">Coming Soon</span>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>Export anywhere</h3>
+        <p>CSV, Excel, JSON — ready to use. Direct integrations with Google Sheets, Airtable, and Notion coming with the full launch.</p>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.4s">
+        <span class="coming-soon">Coming Soon</span>
+        <div class="feat-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>Custom agent workflows</h3>
+        <p>Define your own pipeline — choose sources, set confidence thresholds, configure verification rules. Full control for power users.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-inner">
+    <span class="section-eyebrow">Early Access</span>
+    <h2 class="section-title reveal">Get data you can<br>actually trust</h2>
+    <p class="section-sub reveal">Join the waitlist. Be first in when we launch. No spam — one email, when you're in.</p>
+    <form id="wl-form" class="wl-form reveal" action="https://formspree.io/f/mqeozgnz" method="POST" onsubmit="submitWaitlist(event)">
+      <input class="wl-input" type="email" id="wl-email" name="email" placeholder="your@email.com" required />
+      <button class="btn-primary" type="submit">Join Waitlist</button>
+    </form>
+    <p class="wl-note reveal">No credit card. No commitment. Early access only.</p>
+    <div class="wl-success" id="wl-success">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#15803d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="8"/><path d="M5.5 9l2.5 2.5 4.5-4.5"/></svg>
+      You're on the list — we'll reach out soon!
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">
+    <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+      <circle cx="9" cy="9" r="3" fill="#C0143C"/>
+      <circle cx="18" cy="9" r="2" fill="#F472B6"/>
+      <circle cx="27" cy="9" r="3" fill="#C0143C"/>
+      <circle cx="9" cy="18" r="2" fill="#F472B6"/>
+      <circle cx="18" cy="18" r="3" fill="#C0143C"/>
+      <circle cx="27" cy="18" r="2" fill="#F472B6"/>
+      <circle cx="9" cy="27" r="3" fill="#C0143C"/>
+      <circle cx="18" cy="27" r="2" fill="#F472B6"/>
+      <circle cx="27" cy="27" r="3" fill="#C0143C"/>
+      <line x1="9" y1="9" x2="27" y2="9" stroke="#F472B6" stroke-width="1"/>
+      <line x1="9" y1="18" x2="27" y2="18" stroke="#F472B6" stroke-width="1"/>
+      <line x1="9" y1="27" x2="27" y2="27" stroke="#F472B6" stroke-width="1"/>
+      <line x1="9" y1="9" x2="9" y2="27" stroke="#F472B6" stroke-width="1"/>
+      <line x1="18" y1="9" x2="18" y2="27" stroke="#F472B6" stroke-width="1"/>
+      <line x1="27" y1="9" x2="27" y2="27" stroke="#F472B6" stroke-width="1"/>
+    </svg>
+    <span class="footer-logo-text">Datrix</span>
+  </a>
+  <span class="footer-copy">© 2026 Datrix. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="#flow">Pipeline</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#agents">Agents</a></li>
+    <li><a href="#waitlist">Waitlist</a></li>
+  </ul>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+async function submitWaitlist(event){
+  event.preventDefault();
+  const form = document.getElementById('wl-form');
+  const input = document.getElementById('wl-email');
+  const val = input.value.trim();
+  if(!val || !val.includes('@')){
+    input.style.borderColor = '#C0143C';
+    setTimeout(() => input.style.borderColor = '', 1500);
+    return;
+  }
+
+  const formData = new FormData(form);
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!response.ok) throw new Error('Submission failed');
+
+    form.style.display = 'none';
+    document.querySelector('.wl-note').style.display = 'none';
+    document.getElementById('wl-success').style.display = 'flex';
+  } catch (err) {
+    input.style.borderColor = '#C0143C';
+    setTimeout(() => input.style.borderColor = '', 1500);
+  }
+}
+
+document.getElementById('wl-email').addEventListener('keypress', e => {
+  if(e.key === 'Enter') document.getElementById('wl-form').requestSubmit();
+});
+</script>
+</body>
+</html>
